@@ -4146,6 +4146,14 @@ ul.labels-info li a:hover, ul.labels-info li a:focus {
 .blog .auth-row {
     color: #c8c8c8;
     font-weight: 300;
+    /*padding-bottom: 1px;*/
+    padding-bottom: 0;
+    font-size: 14px;
+}
+
+.blog .category-row {
+    color: #c8c8c8;
+    font-weight: 300;
     padding-bottom: 20px;
     font-size: 14px;
 }
