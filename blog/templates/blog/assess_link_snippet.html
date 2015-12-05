@@ -4,10 +4,12 @@
             <h3>最新评价</h3>
             <ul>
                 {% for assess in assesses %}
-                    <li>
+                    <li style="list-style-type:none; border-bottom:1px solid rgba(52, 71, 255, 0.19)">
                         <a href="{{ assess.get_absolute_url }}">
+                            {{ assess.post.headline }}
+                            <small>{{ assess.create_date|date:'m-d H:m:s' }}</small><br>
                             <i class="  fa fa-comments-o"></i>
-                            {{ assess.user.username }} given a comment on {{ assess.post.headline }} at {{ assess.create_date|date:'m-d H:m:s' }}
+                            {{ assess.user.username }}:{{ assess.context|truncatewords:15 }}
                         </a>
                     </li>
                 {% endfor %}

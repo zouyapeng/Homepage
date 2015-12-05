@@ -91,7 +91,7 @@
                     <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 {#                        <img src="{% static "images/photos/user-avatar.png" %}" alt="" />#}
 {#                        <img src="{% static user.user_profile.avatar %}" alt="" />#}
-                        <img src="{%  user.user_profile.avatar %}  " alt="" />
+                        <img src="{%  static user.user_profile.avatar %}  " alt="" />
                         {{ user.username }}
                         <span class="caret"></span>
                     </a>
