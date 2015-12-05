@@ -19,7 +19,7 @@ class Notice(models.Model):
     content = models.TextField()
     pub_date = models.DateTimeField(editable=False, auto_now_add=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.headline
 
     class Meta:
@@ -36,7 +36,7 @@ class Category(models.Model):
         }
         return reverse('blog:archive-category', kwargs=kwargs)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
 class Post(models.Model):
@@ -56,7 +56,7 @@ class Post(models.Model):
         ordering = ('-pub_date',)
         get_latest_by = 'pub_date'
 
-    def __str__(self):
+    def __unicode__(self):
         return self.headline
 
     def get_absolute_url(self):

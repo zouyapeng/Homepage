@@ -7,7 +7,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 
 # Create your models here.
-def upload(filename):
+def upload(instance, filename):
     file_name = str(uuid.uuid4()) + os.path.splitext(filename)[1]
     return os.path.join(settings.UPLOAD_TO, file_name)
 
@@ -24,6 +24,10 @@ class UserProfile(models.Model):
     signature = models.TextField(null=True, blank=True)
     qq = models.CharField(null=True, blank=True, max_length=255)
 
-    def __str__(self):
+    def save(self, *args, **kwargs):
+
+        super(UserProfile,self).save(*args, **kwargs)
+
+    def __unicode__(self):
         return self.user.username
 
