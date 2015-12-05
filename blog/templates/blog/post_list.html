@@ -2,23 +2,28 @@
 {% load custom_markdown %}
 {% load blog %}
 
-<div class="col-md-8">
+<div class="col-md-9">
     {% autopaginate object_list 10 %}
     {% for post in object_list %}
         <div class="panel">
             <div class="panel-body">
-                <h1 class="mtop35"><a href="{{ post.get_absolute_url }}">{{ post.headline }}</a></h1>
+                <h1 class="mtop35">
+                    <a href="{{ post.get_absolute_url }}">{{ post.headline }}</a>
+                    <small>{{ post.pub_date | date:'Y-m-d H:m:s' }}</small>
+                    {% if post.post_comment.all %}
+                        {{ post.post_comment.all|length }} 条评价
+                    {% else %}
+                         还没有评价
+                    {% endif %}
+                </h1>
                 <p class="auth-row">
-                    By <a href="#">{{ post.author }}</a>   |   {{ post.pub_date | date:'Y-m-d H:m:s' }}
-                </p>
-                <p class="category-row">
                     {% for category in post.category.all %}
                         <a href="{{ category.get_absolute_url }}"><span class="label {% random_label_color %}">{{ category }}</span></a>
                     {% endfor %}
                 </p>
                 <p class="">{{ post.content | custom_markdown | truncatewords_html:25 }}
                 </p>
-                <a href="{{ post.get_absolute_url }}" class="more mbot20">Continue Reading</a>
+                <a href="{{ post.get_absolute_url }}" class="more mbot20">阅读全文</a>
             </div>
         </div>
     {% endfor %}
