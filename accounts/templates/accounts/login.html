@@ -50,6 +50,12 @@
             <button class="btn btn-lg btn-login btn-block" type="submit">
                 <i class="fa fa-check"></i>
             </button>
+            <div class="registration">
+                Not a member yet?
+                <a class="" href="{% url 'account:signup' %}">
+                    Signup
+                </a>
+            </div>
 
             <label class="checkbox">
                 {{ form.remember_me }}

@@ -1,8 +1,8 @@
-<div class="panel blue-box twt-info">
-    <div class="panel-body">
-        <h3>{{ notice.headline }}</h3>
-        <p>
-            {{ notice.content }}
-        </p>
-    </div>
+{% load custom_markdown %}
+<div class="state-info">
+    <section class="panel">
+        <div class="panel-body">
+            {{ notice.content | custom_markdown }}
+        </div>
+    </section>
 </div>

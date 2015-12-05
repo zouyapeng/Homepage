@@ -26,7 +26,7 @@ from django.conf import settings
 urlpatterns = [
     # url(r'^(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
     url(r'^$', RedirectView.as_view(url=reverse_lazy('blog:index'), permanent=True), name='index'),
-    url(r'',include(accounts_urls, namespace='account')),
+    url(r'^accounts/',include(accounts_urls, namespace='account')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^blog/',include(blog_urls, namespace='blog')),
     url(r'^grappelli/',include(grappelli.urls)),

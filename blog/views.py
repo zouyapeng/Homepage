@@ -1,9 +1,12 @@
+from django.core.urlresolvers import reverse_lazy
+from django.contrib.auth.views import login_required
+from django.http import HttpResponseRedirect
+from django.utils.encoding import force_text
 from django.views.generic import(
-    ArchiveIndexView, DateDetailView, MonthArchiveView, YearArchiveView, ListView, CreateView
+    ArchiveIndexView, DateDetailView, MonthArchiveView, YearArchiveView, ListView, CreateView, RedirectView
 )
 
-from models import Post, Category
-
+from models import Post, Category, Comment
 
 # Create your views here.
 class BlogViewMixin(object):
@@ -37,6 +40,11 @@ class BlogArchiveCategoryView(BlogViewMixin, ListView):
         else:
             return Post.objects.published().filter(category=category)
 
+    def get_context_data(self, **kwargs):
+        context = super(BlogViewMixin, self).get_context_data(**kwargs)
+        context['category'] =  Category.objects.get(name=self.kwargs['category'])
+        return context
+
 class BlogDateDetailView(BlogViewMixin, DateDetailView):
     pass
 
@@ -45,3 +53,19 @@ class BlogMonthArchiveView(BlogViewMixin, MonthArchiveView):
 
 class BlogYearArchiveView(BlogViewMixin, YearArchiveView):
     make_object_list = True
+
+@login_required
+def post_new_comment(request):
+    if request.method == 'POST':
+        redirect_to = request.GET['next']
+        print request.path
+        user = request.user
+        post = Post.objects.get(id=int(request.POST['post_id']))
+        context = request.POST['context']
+
+        comment = Comment.objects.create(user=user, post=post, context=context)
+        comment.save()
+
+        return HttpResponseRedirect(redirect_to)
+
+    return HttpResponseRedirect(force_text(reverse_lazy('blog:index')))

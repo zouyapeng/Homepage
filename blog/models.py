@@ -1,3 +1,5 @@
+ # -*- coding: utf-8 -*-
+
 import datetime
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -63,5 +65,24 @@ class Post(models.Model):
             'month': self.pub_date.strftime('%b').lower(),
             'day': self.pub_date.strftime('%d').lower(),
             'slug': self.slug,
+        }
+        return reverse('blog:post', kwargs=kwargs)
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, related_name='user_comment')
+    post = models.ForeignKey(Post, related_name='post_comment')
+    context = models.TextField()
+    create_date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-create_date',)
+        get_latest_by = 'create_date'
+
+    def get_absolute_url(self):
+        kwargs = {
+            'year': self.post.pub_date.year,
+            'month': self.post.pub_date.strftime('%b').lower(),
+            'day': self.post.pub_date.strftime('%d').lower(),
+            'slug': self.post.slug,
         }
         return reverse('blog:post', kwargs=kwargs)

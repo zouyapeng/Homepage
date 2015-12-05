@@ -1,0 +1,23 @@
+{% load staticfiles %}
+
+<div class="panel">
+    <div class="panel-body">
+        <h1 class="text-center cmnt-head">{{ comments|length }} Comments</h1>
+        {% for comment in comments %}
+        <div class="media blog-cmnt">
+            <a href="javascript:;" class="pull-left">
+                <img alt="" src="{% static comment.user.user_profile.avatar %}" class="media-object">
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading">
+                    <a href="#">{{ comment.user.username }}</a>
+                    <small>{{ comment.create_date|date:'Y-m-d H:m:s' }}</small>
+                </h4>
+                <p class="mp-less">
+                    {{ comment.context }}
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

@@ -1,7 +1,7 @@
 import random
 from django import template
 
-from ..models import Post,Category,Notice
+from ..models import Post,Category,Notice,Comment
 
 register = template.Library()
 
@@ -28,7 +28,7 @@ def render_notice_links():
 @register.inclusion_tag('blog/assess_link_snippet.html')
 def render_assess_links():
     return {
-        'assess': [],
+        'assesses': Comment.objects.all()[:5],
     }
 
 @register.simple_tag

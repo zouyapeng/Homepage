@@ -10,9 +10,8 @@
 {% block css %}
 {% endblock %}
 
-{#{% block page-header %}#}
-{#    {{ object.headline | safe }}#}
-{#{% endblock %}#}
+{% block page-header %}
+{% endblock %}
 
 {% block page-body %}
     <div class="row blog">
@@ -35,46 +34,10 @@
                         {% endfor %}
                     </div>
                     {{ object.content | custom_markdown }}
-                    <div class="panel">
-                        <div class="panel-body">
-                            <h1 class="text-center cmnt-head">5 Comments</h1>
-                            <div class="media blog-cmnt">
-                                <a href="javascript:;" class="pull-left">
-                                    <img alt="" src="images/blog/blog-avatar-2.jpg" class="media-object">
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading">
-                                        <a href="#">jones</a>
-                                    </h4>
-                                    <div class="bl-status">
-                                        <span class="pull-left">About 10 Min ago</span>
-                                        <a href="#" class="pull-right reply">Reply</a>
-                                    </div>
-                                    <p class="mp-less">
-                                        Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel">
-                        <div class="panel-body">
-                            <h1 class="text-center cmnt-head ">Leave a Comments</h1>
-                            <form action="#" method="post" class="form-horizontal leave-cmnt">
-                                {% csrf_token %}
-                                {{ form }}
-                                <div class="form-group">
-                                    <div class="col-lg-12">
-                                        <textarea class=" form-control" rows="8" placeholder="Message"></textarea>
-                                    </div>
-                                </div>
-{#                                <input type="submit" name="submit" value="Post">#}
-                                <button class="btn btn-post-cmnt pull-right" type="submit">Post Comment</button>
-                            </form>
-                        </div>
-                    </div>
                 </div>
             </div>
+            {% include 'blog/post_comment.html' with comments=object.post_comment.all %}
+            {% include 'blog/post_new_comment.html' with post_id=object.id %}
         </div>
     </div>
 {% endblock %}

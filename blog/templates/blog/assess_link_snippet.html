@@ -3,10 +3,14 @@
         <div class="blog-post">
             <h3>最新评价</h3>
             <ul>
-                <li><a href="javascript:;"><i class="  fa fa-comments-o"></i> admin on Vestiblulum quis dolor </a></li>
-                <li><a href="javascript:;"><i class="  fa fa-comments-o"></i> admin on Nam sed arcu tellus</a></li>
-                <li><a href="javascript:;"><i class="  fa fa-comments-o"></i> monster002 on Fringilla ut vel ipsum </a></li>
-                <li><a href="javascript:;"><i class="  fa fa-comments-o"></i> admin on Vestiblulum quis dolor sit</a></li>
+                {% for assess in assesses %}
+                    <li>
+                        <a href="{{ assess.get_absolute_url }}">
+                            <i class="  fa fa-comments-o"></i>
+                            {{ assess.user.username }} given a comment on {{ assess.post.headline }} at {{ assess.create_date|date:'m-d H:m:s' }}
+                        </a>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
     </div>

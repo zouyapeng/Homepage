@@ -1132,6 +1132,12 @@ footer.sticky-footer {
     margin-left: 15px;
 }
 
+.state-info .panel {
+    float: right;
+    background-color: #bbfff5;
+    margin-left: 15px;
+}
+
 .state-info .panel .summary {
     float: left;
     margin-right: 20px;
@@ -4328,12 +4334,12 @@ ol.comment-list {
 .blog-cmnt .media-heading, .blog-cmnt .media-heading a {
     color: #414147;
     font-size: 14px;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
 }
 
 .blog-cmnt .media-object  {
-    width: 105px;
-    height: 102px;
+    width: 68px;
+    height: 65px;
     border-radius: 3px;
     -webkit-border-radius: 3px;
 }
