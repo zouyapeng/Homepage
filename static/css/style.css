@@ -4129,7 +4129,7 @@ ul.labels-info li a:hover, ul.labels-info li a:focus {
 
 .blog  h1 {
     font-size: 18px;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     color: #424242;
     font-weight: 400;
     margin: 0px 0 10px 0;
@@ -4267,7 +4267,7 @@ blockquote p {
 
 .blog-tags {
     border-top: 1px solid #f1f1f1;
-    margin:30px 0 0 0;
+    margin:30px 0 20px 0;
     padding-top: 30px;
     display: inline-block;
     width: 100%;
@@ -4397,9 +4397,16 @@ ol.comment-list {
     margin: 20px auto;
 }
 
+/*.leave-cmnt input, .leave-cmnt textarea, .leave-cmnt input:focus, .leave-cmnt textarea:focus {*/
+    /*background: #f2f2f2;*/
+    /*border: none;*/
+    /*box-shadow: none;*/
+/*}*/
+
 .leave-cmnt input, .leave-cmnt textarea, .leave-cmnt input:focus, .leave-cmnt textarea:focus {
     background: #f2f2f2;
-    border: none;
+    resize: none;
+    border:solid 1px #acacac;
     box-shadow: none;
 }
 

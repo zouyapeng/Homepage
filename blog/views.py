@@ -1,5 +1,5 @@
 from django.views.generic import(
-    ArchiveIndexView, DateDetailView, MonthArchiveView, YearArchiveView,ListView
+    ArchiveIndexView, DateDetailView, MonthArchiveView, YearArchiveView, ListView, CreateView
 )
 
 from models import Post, Category
@@ -8,7 +8,6 @@ from models import Post, Category
 # Create your views here.
 class BlogViewMixin(object):
     date_field = 'pub_date'
-    paginate_by = 10
 
     def get_allow_future(self):
         return self.request.user.is_staff
@@ -21,7 +20,7 @@ class BlogViewMixin(object):
 
     def get_context_data(self, **kwargs):
         context = super(BlogViewMixin, self).get_context_data(**kwargs)
-        context['categorys'] = Category.objects.all()
+        # context['notice'] = Category.objects.last()
         return context
 
 class BlogArchiveIndexView(BlogViewMixin, ArchiveIndexView):
@@ -32,7 +31,7 @@ class BlogArchiveCategoryView(BlogViewMixin, ListView):
     queryset = []
 
     def get_queryset(self):
-        category = Category.objects.get(pk=self.kwargs['category_id'])
+        category = Category.objects.get(name=self.kwargs['category'])
         if self.request.user.is_staff:
             return Post.objects.filter(category=category)
         else:

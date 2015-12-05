@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = (
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +42,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'accounts',
     'blog',
+    'pagedown',
+    'pagination',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -52,6 +55,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'pagination.middleware.PaginationMiddleware',
 )
 
 ROOT_URLCONF = 'Homepage.urls'
@@ -67,6 +71,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.i18n',
+                'django.core.context_processors.media',
             ],
         },
     },
@@ -99,7 +105,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 STATIC_URL = '/static/'
@@ -107,3 +112,5 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),os.path.join(BASE_DIR, 'media'))
 MEDIA_ROOT  = os.path.join(BASE_DIR, 'media')
 UPLOAD_TO = 'upload'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static' ,'grappelli')
+ADMIN_MEDIA_PREFIX = STATIC_URL + "grappelli/"

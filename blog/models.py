@@ -3,13 +3,26 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 class PostQuerySet(models.QuerySet):
     def published(self):
-        return self.active().filter(pub_date__lte=datetime.datetime.now())
+        return self.active().filter(pub_date__lte=timezone.now())
 
     def active(self):
         return self.filter(is_active=True)
+
+class Notice(models.Model):
+    headline = models.CharField(max_length=100)
+    content = models.TextField()
+    pub_date = models.DateTimeField(editable=False, auto_now_add=True)
+
+    def __str__(self):
+        return self.headline
+
+    class Meta:
+        ordering = ('-pub_date',)
+        get_latest_by = 'pub_date'
 
 class Category(models.Model):
     name = models.CharField(max_length=128)
@@ -17,11 +30,11 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         kwargs = {
-            'category_id': self.id,
+            'category': self.name,
         }
         return reverse('blog:archive-category', kwargs=kwargs)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 class Post(models.Model):
@@ -30,7 +43,7 @@ class Post(models.Model):
     is_active = models.BooleanField(default=False)
     category = models.ManyToManyField(Category, related_name='category_post')
     content = models.TextField()
-    pub_date = models.DateTimeField()
+    pub_date = models.DateTimeField(auto_now_add=True)
     create_date = models.DateTimeField(editable=False, auto_now_add=True)
     update_date = models.DateTimeField(editable=False, auto_now=True)
     author = models.ForeignKey(User,related_name='user_post')

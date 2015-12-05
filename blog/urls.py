@@ -1,16 +1,10 @@
-from django.conf.urls import url
-from django.views.generic import TemplateView
+from django.conf.urls import url, include
 import views
 
 
 urlpatterns = [
     # url(r'^$', TemplateView.as_view(template_name='blog/index.html'), name='index'),
     url(r'^$', views.BlogArchiveIndexView.as_view(), name='index'),
-    url(
-        r'^category/(?P<category_id>\d+)/$',
-        views.BlogArchiveCategoryView.as_view(),
-        name="archive-category"
-    ),
     url(
         r'^(?P<year>\d{4})/$',
         views.BlogYearArchiveView.as_view(),
@@ -26,4 +20,10 @@ urlpatterns = [
         views.BlogDateDetailView.as_view(),
         name="post"
     ),
+    url(
+        r'^category/(?P<category>\w+)/$',
+        views.BlogArchiveCategoryView.as_view(),
+        name="archive-category"
+    ),
+    # url(r'^comments/', include('django_comments.urls')),
 ]

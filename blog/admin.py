@@ -1,7 +1,22 @@
 from django.contrib import admin
+from pagedown.widgets import AdminPagedownWidget
+from django import forms
 
-from models import Post, Category
+
+from models import Post, Category, Notice
 # Register your models here.
+class PostForm(forms.ModelForm):
+    content = forms.CharField(widget=AdminPagedownWidget())
 
-admin.site.register(Post)
+    class Meta:
+        model = Post
+        fields = '__all__'
+
+class PostAdmin(admin.ModelAdmin):
+    form = PostForm
+    list_display = ['headline', 'create_date', 'pub_date','author', 'is_active']
+    filter_horizontal = ('category',)
+
+admin.site.register(Post, PostAdmin)
 admin.site.register(Category)
+admin.site.register(Notice)
