@@ -6,6 +6,8 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.utils import timezone
+from uuslug import slugify
+
 
 class PostQuerySet(models.QuerySet):
     def published(self):
@@ -41,7 +43,7 @@ class Category(models.Model):
 
 class Post(models.Model):
     headline = models.CharField(max_length=200)
-    slug = models.SlugField(unique_for_date='pub_date')
+    slug = models.SlugField(editable=False, unique_for_date='pub_date')
     is_active = models.BooleanField(default=False)
     category = models.ManyToManyField(Category, related_name='category_post')
     content = models.TextField()
@@ -55,6 +57,10 @@ class Post(models.Model):
     class Meta:
         ordering = ('-pub_date',)
         get_latest_by = 'pub_date'
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.headline)
+        super(Post, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.headline

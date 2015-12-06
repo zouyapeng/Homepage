@@ -30,7 +30,6 @@
                         发表时间：{{ object.pub_date | date:'Y-m-d H:i:s' }}
                     </p>
                     <div class="blog-tags">
-                        Category :
                         {% for category in object.category.all %}
                             <a href="{{ category.get_absolute_url }}"><span class="label {% random_label_color %}">{{ category }}</span></a>
                         {% endfor %}

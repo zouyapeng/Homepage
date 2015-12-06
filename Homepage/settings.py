@@ -114,3 +114,4 @@ MEDIA_ROOT  = os.path.join(BASE_DIR, 'media')
 UPLOAD_TO = 'upload'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static' ,'grappelli')
 ADMIN_MEDIA_PREFIX = STATIC_URL + "grappelli/"
+
