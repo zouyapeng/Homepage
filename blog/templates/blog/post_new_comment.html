@@ -1,5 +1,6 @@
 <div class="panel">
-        <h1 class="text-center cmnt-head ">Leave a Comments</h1>
+    <div class="panel-body">
+        <h1 class="cmnt-head ">Leave a Comments</h1>
         <form action="{% url 'blog:comment' %}?next={{ request.path }}" method="post" class="form-horizontal leave-cmnt">
             {% csrf_token %}
             <input type="hidden" name="post_id" value="{{ post_id }}">

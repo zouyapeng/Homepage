@@ -9,6 +9,7 @@
             <div class="panel-body">
                 <h1 class="mtop35">
                     <a href="{{ post.get_absolute_url }}">{{ post.headline }}</a>
+                    {% if post.is_active == False %}<i class="fa fa-lock"></i>{% endif %}
                     <small>{{ post.pub_date | date:'Y-m-d H:m:s' }}</small>
                     {% if post.post_comment.all %}
                         {{ post.post_comment.all|length }} 条评价
@@ -21,7 +22,7 @@
                         <a href="{{ category.get_absolute_url }}"><span class="label {% random_label_color %}">{{ category }}</span></a>
                     {% endfor %}
                 </p>
-                <p class="">{{ post.content | custom_markdown | truncatewords_html:25 }}
+                <p class="">{{ post.content | custom_markdown | truncatewords_html:10 }}
                 </p>
                 <a href="{{ post.get_absolute_url }}" class="more mbot20">阅读全文</a>
             </div>
