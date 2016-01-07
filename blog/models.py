@@ -1,4 +1,4 @@
- # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 import datetime
 from django.core.urlresolvers import reverse
@@ -7,7 +7,6 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.utils import timezone
 from uuslug import slugify
-
 
 class PostQuerySet(models.QuerySet):
     def published(self):
@@ -57,7 +56,7 @@ class Post(models.Model):
     class Meta:
         ordering = ('-pub_date',)
         get_latest_by = 'pub_date'
-
+    
     def save(self, *args, **kwargs):
         self.slug = slugify(self.headline)
         super(Post, self).save(*args, **kwargs)
@@ -73,6 +72,7 @@ class Post(models.Model):
             'slug': self.slug,
         }
         return reverse('blog:post', kwargs=kwargs)
+
 
 class Comment(models.Model):
     user = models.ForeignKey(User, related_name='user_comment')

@@ -18,16 +18,12 @@ from django.contrib import admin
 from django.core.urlresolvers import reverse_lazy
 from accounts import urls as accounts_urls
 from blog import urls as blog_urls
-import grappelli.urls
 from django.views.generic import RedirectView
-from django.conf import settings
 
 
 urlpatterns = [
-    # url(r'^(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
     url(r'^$', RedirectView.as_view(url=reverse_lazy('blog:index'), permanent=True), name='index'),
     url(r'^accounts/',include(accounts_urls, namespace='account')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^blog/',include(blog_urls, namespace='blog')),
-    url(r'^grappelli/',include(grappelli.urls)),
 ]

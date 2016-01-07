@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 import random
 import uuid
@@ -17,17 +18,13 @@ def random_default_avatar():
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='user_profile')
-    avatar = models.ImageField("avatar", upload_to=upload, default=random_default_avatar)
+    avatar = models.ImageField("avatar", upload_to=upload, default='upload/default.png')
     sex = models.CharField(choices=(('man', 'man'), ('female', 'female'), ('secrecy', 'secrecy')), max_length=10,
                            default='secrecy')
     birthday = models.DateField(null=True, blank=True)
     signature = models.TextField(null=True, blank=True)
     qq = models.CharField(null=True, blank=True, max_length=255)
 
-    def save(self, *args, **kwargs):
-
-        super(UserProfile,self).save(*args, **kwargs)
-
-    def __unicode__(self):
+    def __str__(self):
         return self.user.username
 

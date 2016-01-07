@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-{#{% load static %}#}
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="ThemeBucket">
+    <meta name="baidu-site-verification" content="IPQrqm0kP7" />
     <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/png">
 
     <title>
@@ -16,7 +16,8 @@
 
     <link href="{% static "css/style.css" %}" rel="stylesheet">
     <link href="{% static "css/style-responsive.css" %}" rel="stylesheet">
-    <link rel="stylesheet" href="{% static "js/styles/zenburn.css" %}" />
+    <!--link rel="stylesheet" href="{% static "js/styles/zenburn.css" %}" /-->
+    <link rel="stylesheet" href="{% static "js/styles/monokai.css" %}" />
 
     {% block css %}
     {% endblock %}
@@ -89,9 +90,8 @@
                 </li>
                 <li>
                     <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-{#                        <img src="{% static "images/photos/user-avatar.png" %}" alt="" />#}
-{#                        <img src="{% static user.user_profile.avatar %}" alt="" />#}
-                        <img src="{%  static user.user_profile.avatar %}  " alt="" />
+                        {#<img src="{% static user.user_profile.avatar %}" alt="" />#}
+                        <img src="/media/{{ user.user_profile.avatar }}" alt="" />
                         {{ user.username }}
                         <span class="caret"></span>
                     </a>

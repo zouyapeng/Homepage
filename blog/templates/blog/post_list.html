@@ -7,9 +7,9 @@
     {% for post in object_list %}
         <div class="panel">
             <div class="panel-body">
-                <h1 class="mtop35">
+		<h1 class="mtop35">
                     <a href="{{ post.get_absolute_url }}">{{ post.headline }}</a>
-                    {% if post.is_active == False %}<i class="fa fa-lock"></i>{% endif %}
+		    {% if post.is_active == False %}<i class="fa fa-lock"></i>{% endif %}
                     <small>{{ post.pub_date | date:'Y-m-d H:m:s' }}</small>
                     {% if post.post_comment.all %}
                         {{ post.post_comment.all|length }} 条评价

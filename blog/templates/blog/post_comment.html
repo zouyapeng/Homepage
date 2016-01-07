@@ -6,7 +6,7 @@
         {% for comment in comments %}
         <div class="media blog-cmnt">
             <a href="javascript:;" class="pull-left">
-                <img alt="" src="{% static comment.user.user_profile.avatar %}" class="media-object">
+                <img alt="" src="/media/{{ comment.user.user_profile.avatar }}" class="media-object">
             </a>
             <div class="media-body">
                 <h4 class="media-heading">
