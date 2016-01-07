@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.encoding import force_text
-from django.views.generic import FormView, RedirectView
+from django.views.generic import FormView, RedirectView, TemplateView
 from accounts.forms import LoginForm,RegistrationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
@@ -91,7 +91,8 @@ class LogoutView(RedirectView):
         logout(request)
         return super(LogoutView, self).get(request, *args, **kwargs)
 
-
+class AboutView(TemplateView):
+    template_name = 'accounts/profile.html'
 
 
 

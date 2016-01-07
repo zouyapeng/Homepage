@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    我
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block page-header %}
+{% endblock %}
+
+{% block page-body %}
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="profile-pic text-center">
+                                <img alt="" src="{% static 'images/photos/me-avatar.jpg' %}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <ul class="p-info">
+                                <li>
+                                    <div class="title">姓名</div>
+                                    <div class="desk">邹亚鹏</div>
+                                </li>
+                                <li>
+                                    <div class="title">年龄</div>
+                                    <div class="desk">27</div>
+                                </li>
+                                <li>
+                                    <div class="title">电话</div>
+                                    <div class="desk">+86 18351941235</div>
+                                </li>
+                                <li>
+                                    <div class="title">公司</div>
+                                    <div class="desk">上海新致软件股份有限公司</div>
+                                </li>
+                                <li>
+                                    <div class="title">大学</div>
+                                    <div class="desk">南京工程院校</div>
+                                </li>
+                                <li>
+                                    <div class="title">技能</div>
+                                    <div class="desk">Openstack, Python, C语言, Django.</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="profile-desk">
+                                <h1>邹亚鹏</h1>
+                                <span class="designation">云计算软件工程师</span>
+                                <p>
+                                    I have 10 years of experience designing for the web, and specialize in the areas of user interface design, interaction design, visual design and prototyping. I’ve worked with notable startups including Pearl Street Software.
+                                </p>
+                                <a class="btn p-follow-btn pull-left" href="#"> <i class="fa fa-check"></i> Following</a>
+
+                                <ul class="p-social-link pull-right">
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-facebook"></i>
+                                        </a>
+                                    </li>
+                                    <li class="active">
+                                        <a href="#">
+                                            <i class="fa fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-google-plus"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+{% endblock %}

@@ -1,6 +1,6 @@
 <ul class="nav nav-pills nav-stacked custom-nav">
-    <li><a href=""><i class="fa fa-user"></i> <span>我</span></a></li>
-    <li class="active"><a href="{% url 'blog:index'%}"><i class="fa fa-file-text"></i> <span>博客</span></a></li>
+    <li class="{% if '/accounts/' in request.path %}active{% endif %}"><a href="{% url 'account:about' %}"><i class="fa fa-user"></i> <span>我</span></a></li>
+    <li class="{% if '/blog/' in request.path %}active{% endif %}"><a href="{% url 'blog:index'%}"><i class="fa fa-file-text"></i> <span>博客</span></a></li>
     <li><a href="http://wiki.zouyapeng.website"><i class="fa fa-book"></i> <span>Wiki</span></a></li>
     <!--li><a href=""><i class="fa fa-glass"></i> <span>生活</span></a></li-->
     <!--li><a href=""><i class="fa fa-globe"></i> <span>英语</span></a></li-->
