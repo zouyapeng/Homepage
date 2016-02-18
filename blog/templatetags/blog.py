@@ -36,3 +36,7 @@ def render_assess_links():
 def random_label_color():
     colors = ['label-danger', 'label-warning', 'label-info', 'label-success', 'label-primary', 'label-default']
     return random.choice(colors)
+
+@register.inclusion_tag('blog/friendly_link_snippet.html')
+def render_friendly_links():
+    return {}

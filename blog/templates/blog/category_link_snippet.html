@@ -3,12 +3,12 @@
         <div class="blog-post">
             <h3>分类</h3>
             <ul>
-                {% for category in categorys|slice:":10" %}
+                {% for category in categorys %}
                     <li><a href="{{ category.get_absolute_url }}"><i class="fa fa-angle-right"></i> {{ category }}({{ category.category_post.all | length  }})</a></li>
                 {% endfor %}
-                {% if categorys|length > 2 %}
-                    <li><a href="#"><i class="fa fa-angle-right"></i> 查看全部分类</a></li>
-                {% endif %}
+{#                {% if categorys|length > 2 %}#}
+{#                    <li><a href="#"><i class="fa fa-angle-right"></i> 查看全部分类</a></li>#}
+{#                {% endif %}#}
             </ul>
         </div>
     </div>
