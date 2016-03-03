@@ -1,0 +1,82 @@
+<div class="col-md-12">
+    <section class="panel">
+        <header class="panel-heading custom-tab blue-tab">
+            <ul class="nav nav-tabs">
+                {% if tag %}
+                    {% for company in companys %}
+                    <li class="{% if company.id == tag %}active{% endif %}">
+                        <a href="?tag={{ company.id }}">{{ company.name }}</a>
+                    </li>
+                    {% endfor %}
+                {% else %}
+                    {% for company in companys %}
+                    <li class="{% if company.id == 1 %}active{% endif %}">
+                        <a href="?tag={{ company.id }}">{{ company.name }}</a>
+                    </li>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </header>
+        <div class="panel-body">
+            <div class="tab-content">
+                {% if tag %}
+                    {% for company in companys %}
+                        {% if company.id == tag %}
+                            <div class="well">
+                                <h3><strong>{{ company.name }}</strong></h3><br>
+                                <strong> 入职时间 : </strong>{{ company.in_time }}<br>
+                                <strong> 离职时间 : </strong>{{ company.out_time }}<br>
+                                <strong> 职位 : </strong>{{ company.position }}<br>
+                                <strong> 主要工作 : </strong><br>
+                                {% autoescape off %}
+                                    {{ company.duty }}<br>
+                                {% endautoescape %}
+                                <strong> 离职原因 : </strong><br>
+                                {% autoescape off %}
+                                    {{ company.leaving_reasons }}<br>
+                                {% endautoescape %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    {% for company in companys %}
+                        {% if company.id == tag %}
+                            <div class="well">
+                                <h3><strong>{{ company.name }}</strong></h3><br>
+                                <strong> 入职时间 : </strong>{{ company.in_time }}<br>
+                                <strong> 离职时间 : </strong>{{ company.out_time }}<br>
+                                <strong> 职位 : </strong>{{ company.position }}<br>
+                                <strong> 主要工作 : </strong><br>
+                                {% autoescape off %}
+                                    {{ company.duty }}<br>
+                                {% endautoescape %}
+                                <strong> 离职原因 : </strong><br>
+                                {% autoescape off %}
+                                    {{ company.leaving_reasons }}<br>
+                                {% endautoescape %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <hr>
+                <h2>相关项目</h2>
+                {% for project in projects %}
+                    <div class="well">
+                        <h3><strong>{{ project.name }}</strong></h3><br>
+                        <strong> 开始时间 : </strong>{{ project.start_time }}<br>
+                        <strong> 结束时间 : </strong>{{ project.end_time }}<br>
+                        <strong> 开发人数 : </strong>{{ project.person_num }}<br>
+                        <strong> 项目描述 : </strong><br>
+                        {% autoescape off %}
+                            {{ project.description }}<br>
+                        {% endautoescape %}
+                        <strong> 主要任务 : </strong><br>
+                        {% autoescape off %}
+                            {{ project.duty }}<br>
+                        {% endautoescape %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</div>

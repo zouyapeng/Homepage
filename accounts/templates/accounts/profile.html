@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load accounts %}
 
 {% block title %}
     我
@@ -50,7 +51,7 @@
                                 </li>
                                 <li>
                                     <div class="title">技能</div>
-                                    <div class="desk">Openstack, Python, C语言, Django.</div>
+                                    <div class="desk">云计算, OpenStack, Docker, Python, C语言.</div>
                                 </li>
                             </ul>
                         </div>
@@ -77,8 +78,8 @@
                                             <i class="fa fa-wechat"></i>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#">
+                                    <li class="active">
+                                        <a target="_blank" href="https://github.com/zouyapeng">
                                             <i class="fa fa-github"></i>
                                         </a>
                                     </li>
@@ -97,6 +98,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                {% render_work_links tag %}
             </div>
         </div>
     </div>

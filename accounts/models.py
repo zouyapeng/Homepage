@@ -28,3 +28,26 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
+class Company(models.Model):
+    name = models.CharField(max_length=128)
+    in_time = models.DateField()
+    out_time = models.DateField(null=True, blank=True)
+    position = models.CharField(max_length=128)
+    duty = models.TextField()
+    leaving_reasons = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+class Project(models.Model):
+    company = models.ForeignKey(Company, related_name='company_project')
+    name = models.CharField(max_length=128)
+    start_time = models.DateField()
+    end_time = models.DateField()
+    person_num = models.IntegerField()
+    description = models.TextField()
+    duty = models.TextField()
+
+    def __str__(self):
+        return self.name
+

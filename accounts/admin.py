@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
-from models import UserProfile
+from models import UserProfile,Project,Company
 
 # Register your models here.
 class ProfileInline(admin.TabularInline):
@@ -15,3 +15,8 @@ class CustomUserAdmin(UserAdmin):
 
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
+
+admin.site.register(Company)
+admin.site.register(Project)
+
+
