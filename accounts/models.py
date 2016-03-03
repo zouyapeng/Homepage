@@ -36,7 +36,7 @@ class Company(models.Model):
     duty = models.TextField()
     leaving_reasons = models.TextField()
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
 class Project(models.Model):
@@ -48,6 +48,6 @@ class Project(models.Model):
     description = models.TextField()
     duty = models.TextField()
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
