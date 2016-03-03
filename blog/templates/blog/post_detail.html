@@ -37,7 +37,13 @@
                             <a href="{{ category.get_absolute_url }}"><span class="label {% random_label_color %}">{{ category }}</span></a>
                         {% endfor %}
                     </div>
-                    {{ object.content | custom_markdown }}
+                    <div id="blog_body">
+                        {{ object.content | custom_markdown }}
+                    </div>
+
+                    <div class="blog-tags">
+                        {% include 'blog/share.html' %}
+                    </div>
                 </div>
             </div>
             {% include 'blog/post_comment.html' with comments=object.post_comment.all %}
