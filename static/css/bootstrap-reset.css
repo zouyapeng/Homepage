@@ -48,20 +48,6 @@
     -webkit-border-radius: 3px;
 }
 
-.progress-bar {
-    box-shadow: none;
-    line-height: 15px;
-    text-align: right;
-    padding-right: 10px;
-    font-size: 11px;
-}
-
-/*alert*/
-
-.alert-success, .alert-danger, .alert-info, .alert-warning {
-    border: none;
-}
-
 /*table*/
 
 .table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th, .table thead > tr > td, .table tbody > tr > td, .table tfoot > tr > td {
