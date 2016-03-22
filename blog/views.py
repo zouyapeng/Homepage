@@ -59,7 +59,6 @@ class BlogYearArchiveView(BlogViewMixin, YearArchiveView):
 def post_new_comment(request):
     if request.method == 'POST':
         redirect_to = request.GET['next']
-        print request.path
         user = request.user
         post = Post.objects.get(id=int(request.POST['post_id']))
         context = request.POST['context']
