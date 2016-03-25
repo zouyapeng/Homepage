@@ -84,6 +84,13 @@ class Comment(models.Model):
         ordering = ('-create_date',)
         get_latest_by = 'create_date'
 
+    def save(self, *args, **kwargs):
+        super(Comment, self).save(*args, **kwargs)
+        comments = self.post.post_comment.all()
+        emails = list(set([comment.user.email for comment in comments ]))
+        emails.remove(self.user.email)
+        emails.remove(self.post.author.email)
+
     def get_absolute_url(self):
         kwargs = {
             'year': self.post.pub_date.year,
@@ -92,3 +99,6 @@ class Comment(models.Model):
             'slug': self.post.slug,
         }
         return reverse('blog:post', kwargs=kwargs)
+
+    def __unicode__(self):
+        return self.create_date.strftime('%H:%M:%S')

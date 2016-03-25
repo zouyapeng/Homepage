@@ -63,8 +63,9 @@ def post_new_comment(request):
         post = Post.objects.get(id=int(request.POST['post_id']))
         context = request.POST['context']
 
-        comment = Comment.objects.create(user=user, post=post, context=context)
-        comment.save()
+        Comment.objects.create(user=user, post=post, context=context)
+        # comment = Comment.objects.create(user=user, post=post, context=context)
+        # comment.save()
 
         return HttpResponseRedirect(redirect_to)
 

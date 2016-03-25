@@ -4,13 +4,13 @@ from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.encoding import force_text
-from django.views.generic import FormView, RedirectView, TemplateView, ListView
-from accounts.forms import LoginForm,RegistrationForm
+from django.views.generic import FormView, RedirectView, TemplateView, ListView, DetailView
+from accounts.forms import LoginForm,RegistrationForm, ProfileForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.forms.utils import ErrorList
 
-from models import Company, Project
+from models import Company, Project, UserProfile
 
 # Create your views here.
 class RegistrationView(FormView):
@@ -94,7 +94,7 @@ class LogoutView(RedirectView):
         return super(LogoutView, self).get(request, *args, **kwargs)
 
 class AboutView(ListView):
-    template_name = 'accounts/profile.html'
+    template_name = 'accounts/adout.html'
     queryset = []
 
     def get_context_data(self, **kwargs):
@@ -111,3 +111,21 @@ class AboutView(ListView):
         return context
 
 
+
+class Profile(FormView):
+    form_class = ProfileForm
+    template_name = 'accounts/user_profile.html'
+    success_url = reverse_lazy("account:profile")
+
+
+    def post(self, request, *args, **kwargs):
+        pass
+
+
+    def get(self, request, *args, **kwargs):
+        user = User.objects.get(username = request.user.username)
+        self.initial = {
+            'username': request.user.username,
+        }
+
+        return super(Profile, self).get(request, *args, **kwargs)

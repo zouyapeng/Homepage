@@ -32,7 +32,7 @@ register = template.Library()
 #         'assesses': Comment.objects.all()[:5],
 #     }
 
-@register.inclusion_tag('accounts/profile_work_link_snippet.html')
+@register.inclusion_tag('accounts/adout_work_link_snippet.html')
 def render_work_links(tag):
     return {
         'tag':tag,

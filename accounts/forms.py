@@ -71,4 +71,30 @@ class LoginForm(forms.Form):
                                                                                     'value':'remember-me'}))
 
 
+class ProfileForm(forms.Form):
+    username = forms.CharField(max_length=100,
+                               label='Username',
+                               required=True,
+                               widget=forms.TextInput(attrs={'class' : 'form-control',
+                                                             'type': 'text'}))
+    email = forms.EmailField(label='Email',
+                             required=True,
+                             widget=forms.EmailInput(attrs={'class' : 'form-control',
+                                                            'type': 'text'}))
 
+    sex = forms.ChoiceField(label='Sex',
+                            choices=(('Male','Male'),('Female','Female')),
+                            widget=forms.RadioSelect())
+
+    birthday = forms.DateField(label='Birthday',
+                               widget=forms.DateInput(attrs={'class': 'form-control form-control-inline input-medium default-date-picker',
+                                                             'type': 'text',
+                                                             'size': '16'}))
+    signature = forms.CharField(max_length=256,
+                               label='Signature',
+                               widget=forms.TextInput(attrs={'class' : 'form-control',
+                                                             'type': 'text'}))
+    qq = forms.CharField(max_length=256,
+                               label='QQ',
+                               widget=forms.TextInput(attrs={'class' : 'form-control',
+                                                             'type': 'text'}))
