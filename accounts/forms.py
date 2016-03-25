@@ -83,6 +83,10 @@ class ProfileForm(forms.Form):
                              widget=forms.EmailInput(attrs={'class' : 'form-control',
                                                             'type': 'text',
                                                             'readonly':''}))
+
+    enable_email = forms.BooleanField(required=False ,
+                                      widget=forms.CheckboxInput(attrs={'type':'checkbox'}))
+
     avatar = forms.ImageField(label='Avatar')
 
     sex = forms.ChoiceField(label='Sex',
@@ -120,6 +124,7 @@ class ProfileForm(forms.Form):
         userprofile.birthday = form['birthday']
         userprofile.qq = form['qq']
         userprofile.sex = form['sex']
+        userprofile.enable_email = form['enable_email']
         userprofile.signature = form['signature']
         userprofile.avatar = form['avatar']
 

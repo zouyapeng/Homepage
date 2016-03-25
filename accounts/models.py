@@ -18,6 +18,7 @@ def random_default_avatar():
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='user_profile')
+    enable_email = models.BooleanField(default=False)
     avatar = models.ImageField("avatar", upload_to=upload, default='upload/default.png')
     sex = models.CharField(choices=(('man', 'man'), ('female', 'female'), ('secrecy', 'secrecy')), max_length=10,
                            default='secrecy')

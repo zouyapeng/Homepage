@@ -135,6 +135,7 @@ class Profile(FormView):
         self.initial = {
             'username': request.user.username,
             'email': user.email,
+            'enable_email': user.user_profile.enable_email,
             'avatar': user.user_profile.avatar,
             'birthday': user.user_profile.birthday,
             'sex': user.user_profile.sex,
