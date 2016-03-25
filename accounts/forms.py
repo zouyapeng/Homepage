@@ -76,25 +76,51 @@ class ProfileForm(forms.Form):
                                label='Username',
                                required=True,
                                widget=forms.TextInput(attrs={'class' : 'form-control',
-                                                             'type': 'text'}))
+                                                             'type': 'text',
+                                                             'readonly':''}))
     email = forms.EmailField(label='Email',
                              required=True,
                              widget=forms.EmailInput(attrs={'class' : 'form-control',
-                                                            'type': 'text'}))
+                                                            'type': 'text',
+                                                            'readonly':''}))
+    avatar = forms.ImageField(label='Avatar')
 
     sex = forms.ChoiceField(label='Sex',
-                            choices=(('Male','Male'),('Female','Female')),
-                            widget=forms.RadioSelect())
+                            choices=(('Male','Male'),('Female','Female'),('Secrecy','Secrecy')),
+                            widget=forms.RadioSelect(attrs={'tabindex': '3',
+                                                            'type': 'radio',
+                                                            'name': 'demo-radio'}))
 
     birthday = forms.DateField(label='Birthday',
                                widget=forms.DateInput(attrs={'class': 'form-control form-control-inline input-medium default-date-picker',
                                                              'type': 'text',
                                                              'size': '16'}))
     signature = forms.CharField(max_length=256,
-                               label='Signature',
-                               widget=forms.TextInput(attrs={'class' : 'form-control',
+                                label='Signature',
+                                required=False,
+                                widget=forms.TextInput(attrs={'class' : 'form-control',
                                                              'type': 'text'}))
     qq = forms.CharField(max_length=256,
+                         required=False,
                                label='QQ',
                                widget=forms.TextInput(attrs={'class' : 'form-control',
                                                              'type': 'text'}))
+
+    def clean(self):
+        super(ProfileForm, self).clean()
+        upload_to = '/upload'
+        if not 'avatar' in self.cleaned_data:
+            return self.cleaned_data
+        upload_to += self.cleaned_data['avatar'].name
+
+    def save(self):
+        form = self.cleaned_data
+        user = User.objects.get(username = form['username'])
+        userprofile = UserProfile.objects.get(user=user)
+        userprofile.birthday = form['birthday']
+        userprofile.qq = form['qq']
+        userprofile.sex = form['sex']
+        userprofile.signature = form['signature']
+        userprofile.avatar = form['avatar']
+
+        userprofile.save()

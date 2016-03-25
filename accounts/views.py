@@ -54,7 +54,7 @@ class RegistrationView(FormView):
             if user:
                 login(self.request,user)
 
-        return  super(RegistrationView, self).post(request, *args, **kwargs)
+        return super(RegistrationView, self).post(request, *args, **kwargs)
 
 class LoginView(FormView):
     form_class = LoginForm
@@ -116,16 +116,30 @@ class Profile(FormView):
     form_class = ProfileForm
     template_name = 'accounts/user_profile.html'
     success_url = reverse_lazy("account:profile")
-
+    # success_url = reverse_lazy("blog:index")
 
     def post(self, request, *args, **kwargs):
-        pass
+        print request.FILES
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+        # return super(Profile, self).post(request, *args, **kwargs)
 
 
     def get(self, request, *args, **kwargs):
         user = User.objects.get(username = request.user.username)
         self.initial = {
             'username': request.user.username,
+            'email': user.email,
+            'avatar': user.user_profile.avatar,
+            'birthday': user.user_profile.birthday,
+            'sex': user.user_profile.sex,
+            'qq' : user.user_profile.qq,
+            'signature': user.user_profile.signature,
         }
 
         return super(Profile, self).get(request, *args, **kwargs)

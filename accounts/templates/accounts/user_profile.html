@@ -6,6 +6,10 @@
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{% static 'js/bootstrap-datepicker/css/datepicker-custom.css' %}" />
+
+    <link href="{% static 'js/iCheck/skins/square/square.css' %}" rel="stylesheet">
+    <link href="{% static 'js/iCheck/skins/square/red.css' %}" rel="stylesheet">
+    <link href="{% static 'js/iCheck/skins/square/green.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block page-header %}
@@ -20,9 +24,23 @@
                     个人信息
                 </header>
                 <div class="panel-body">
-                    <form class="form-horizontal adminex-form" action="{% url 'account:profile' %}" method="post">
+                    <form  enctype="multipart/form-data" class="form-horizontal adminex-form col-sm-12" action="{% url 'account:profile' %}" method="post">
                         {% csrf_token %}
                         {{ form.non_field_errors }}
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">{{ form.avatar.label }}</label>
+                            <div class="col-sm-10">
+                                <img src="/media/{{ form.avatar.value }}" />
+{#                                {{ form.avatar }}#}
+                                <input id="id_avatar" name="avatar" type="file">
+                                {% for error in form.avatar.errors %}
+                                    <div class="has-error">
+                                        <p class="help-block">{{ error }}</p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label">{{ form.username.label }}</label>
                             <div class="col-sm-10">
@@ -37,16 +55,73 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-2 col-sm-2 control-label">{{ form.birthday.label }}</label>
+                            <label class="col-sm-2 col-sm-2 control-label">{{ form.email.label }}</label>
                             <div class="col-sm-10">
+                                {{ form.email }}
+                                {% for error in form.email.errors %}
+                                    <div class="has-error">
+                                        <p class="help-block">{{ error }}</p>
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ form.sex.label }}</label>
+
+                            <div class="col-sm-9 icheck">
+                                {% for radio in form.sex %}
+                                    <div class="square col-sm-2">
+                                        <div class="radio">
+                                            {{ radio.tag }}
+                                            {{ radio.choice_label }}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                {% for error in form.sex.errors %}
+                                    <div class="has-error">
+                                        <p class="help-block">{{ error }}</p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">{{ form.birthday.label }}</label>
+                            <div class="col-sm-10 col-xs-11">
                                 {{ form.birthday }}
                                 {% for error in form.birthday.errors %}
                                     <div class="has-error">
                                         <p class="help-block">{{ error }}</p>
                                     </div>
                                 {% endfor %}
-                                <input class="form-control form-control-inline input-medium default-date-picker"  size="16" type="text" value="" />
-                                <span class="help-block">Select date</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">{{ form.qq.label }}</label>
+                            <div class="col-sm-10">
+                                {{ form.qq }}
+                                {% for error in form.qq.errors %}
+                                    <div class="has-error">
+                                        <p class="help-block">{{ error }}</p>
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">{{ form.signature.label }}</label>
+                            <div class="col-sm-10">
+                                {{ form.signature }}
+                                {% for error in form.signature.errors %}
+                                    <div class="has-error">
+                                        <p class="help-block">{{ error }}</p>
+                                    </div>
+                                {% endfor %}
+
                             </div>
                         </div>
 
@@ -54,10 +129,21 @@
                             <label class="col-sm-2 col-sm-2 control-label"></label>
                             <div class="col-lg-offset-2 col-lg-10">
                                 <button type="submit" class="btn btn-primary"> 修改 </button>
+                                <a role="button" href="{% url 'blog:index' %}" class="btn btn-default"> 取消 </a>
                             </div>
                         </div>
 
                     </form>
+{#                    <div class="col-sm-4">#}
+{#                        <div class="row">#}
+{#                            <header class="panel-heading">#}
+{#                                sssss#}
+{#                            </header>#}
+{#                            <div class="panel-body">#}
+{#                                sssss#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
                 </div>
             </section>
         </div>
@@ -73,5 +159,12 @@
 {% endblock %}
 
 {% block js %}
+    <!--icheck -->
+    <script src="{% static 'js/iCheck/jquery.icheck.js' %}"></script>
+    <script src="{% static 'js/icheck-init.js' %}"></script>
+
     <script type="text/javascript" src="{% static 'js/bootstrap-datepicker/js/bootstrap-datepicker.js' %}"></script>
+
+    <!--pickers initialization-->
+    <script src="{% static 'js/pickers-init.js' %}"></script>
 {% endblock %}
