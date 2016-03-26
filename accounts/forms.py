@@ -87,7 +87,7 @@ class ProfileForm(forms.Form):
     enable_email = forms.BooleanField(required=False ,
                                       widget=forms.CheckboxInput(attrs={'type':'checkbox'}))
 
-    avatar = forms.ImageField(label='Avatar')
+    avatar = forms.ImageField(label='Avatar',required=False)
 
     sex = forms.ChoiceField(label='Sex',
                             choices=(('Male','Male'),('Female','Female'),('Secrecy','Secrecy')),
@@ -115,7 +115,11 @@ class ProfileForm(forms.Form):
         upload_to = '/upload'
         if not 'avatar' in self.cleaned_data:
             return self.cleaned_data
-        upload_to += self.cleaned_data['avatar'].name
+        else:
+            if self.cleaned_data['avatar'] is None:
+                return None
+            else:
+                upload_to += self.cleaned_data['avatar'].name
 
     def save(self):
         form = self.cleaned_data
@@ -126,6 +130,8 @@ class ProfileForm(forms.Form):
         userprofile.sex = form['sex']
         userprofile.enable_email = form['enable_email']
         userprofile.signature = form['signature']
-        userprofile.avatar = form['avatar']
+
+        if form['avatar'] is not None:
+            userprofile.avatar = form['avatar']
 
         userprofile.save()

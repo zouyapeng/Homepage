@@ -119,7 +119,6 @@ class Profile(FormView):
     # success_url = reverse_lazy("blog:index")
 
     def post(self, request, *args, **kwargs):
-        print request.FILES
         form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()

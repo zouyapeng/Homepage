@@ -1,10 +1,10 @@
 {% load staticfiles %}
 
-<div class="panel">
+<div class="panel" id="comments ">
     <div class="panel-body">
         <h1 class="cmnt-head">{{ comments|length }} Comments</h1>
         {% for comment in comments %}
-        <div class="media blog-cmnt">
+        <div class="media blog-cmnt" style="list-style-type:none;border-bottom:1px solid rgba(52, 71, 255, 0.19);">
             <a href="javascript:;" class="pull-left">
                 <img alt="" src="/media/{{ comment.user.user_profile.avatar }}" class="media-object">
             </a>

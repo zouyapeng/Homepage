@@ -8,8 +8,11 @@
     <link rel="stylesheet" type="text/css" href="{% static 'js/bootstrap-datepicker/css/datepicker-custom.css' %}" />
 
     <link href="{% static 'js/iCheck/skins/square/square.css' %}" rel="stylesheet">
-    <link href="{% static 'js/iCheck/skins/square/red.css' %}" rel="stylesheet">
+{#    <link href="{% static 'js/iCheck/skins/square/red.css' %}" rel="stylesheet">#}
     <link href="{% static 'js/iCheck/skins/square/green.css' %}" rel="stylesheet">
+
+    <!--file upload-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-fileupload.min.css' %}" />
 {% endblock %}
 
 {% block page-header %}
@@ -30,9 +33,43 @@
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label">{{ form.avatar.label }}</label>
                             <div class="col-sm-10">
-                                <img src="/media/{{ form.avatar.value }}" />
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                        <img src="/media/{{ form.avatar.value }}" alt="" />
+                                    </div>
+                                    <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileupload-new"><i class="fa fa-paper-clip"></i> Select image</span>
+                                            <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+                                            <input id="id_avatar" name="avatar" type="file" class="default" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> Remove</a>
+                                    </div>
+                                </div>
+                                <br/>
+                                <span class="label label-danger ">NOTE!</span>
+                                <span>
+                                 Attached image thumbnail is
+                                 supported in Latest Firefox, Chrome, Opera,
+                                 Safari and Internet Explorer 10 only
+                                </span>
+{#                                <img src="/media/{{ form.avatar.value }}" />#}
 {#                                {{ form.avatar }}#}
-                                <input id="id_avatar" name="avatar" type="file">
+{#                                <div class="controls col-md-9">#}
+{#                                    <div class="fileupload fileupload-new" data-provides="fileupload">#}
+{#                                        <span class="btn btn-default btn-file">#}
+{#                                            <span class="fileupload-new"><i class="fa fa-paper-clip"></i> Select file</span>#}
+{#                                            <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>#}
+{#                                            <input id="id_avatar" name="avatar" type="file" class="default" />#}
+{#                                            <input type="file" class="default" />#}
+{##}
+{#                                        </span>#}
+{#                                        <span class="fileupload-preview" style="margin-left:5px;"></span>#}
+{#                                        <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <input id="id_avatar" name="avatar" type="file">#}
                                 {% for error in form.avatar.errors %}
                                     <div class="has-error">
                                         <p class="help-block">{{ error }}</p>
@@ -69,14 +106,17 @@
 
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label">{{ form.enable_email.label }}</label>
-                            <div class="col-sm-10">
-                                {{ form.enable_email }}
-                                {% for error in form.enable_email.errors %}
-                                    <div class="has-error">
-                                        <p class="help-block">{{ error }}</p>
+                            <div class="col-sm-10 icheck">
+                                <div class="square-green">
+                                    <div class="checkbox">
+                                        {{ form.enable_email }}
                                     </div>
-                                {% endfor %}
-
+                                    {% for error in form.enable_email.errors %}
+                                        <div class="has-error">
+                                            <p class="help-block">{{ error }}</p>
+                                        </div>
+                                    {% endfor %}
+                                </div>
                             </div>
                         </div>
 
@@ -180,4 +220,7 @@
 
     <!--pickers initialization-->
     <script src="{% static 'js/pickers-init.js' %}"></script>
+
+    <!--file upload-->
+    <script type="text/javascript" src="{% static 'js/bootstrap-fileupload.min.js' %}"></script>
 {% endblock %}

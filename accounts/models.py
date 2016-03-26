@@ -7,6 +7,9 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 
+import smtplib
+from email.mime.text import MIMEText
+
 # Create your models here.
 def upload(instance, filename):
     file_name = str(uuid.uuid4()) + os.path.splitext(filename)[1]
@@ -25,6 +28,26 @@ class UserProfile(models.Model):
     birthday = models.DateField(null=True, blank=True)
     signature = models.TextField(null=True, blank=True)
     qq = models.CharField(null=True, blank=True, max_length=255)
+
+    def email_user(self, subject, message):
+        content = message
+        to_list = [self.user.email]
+        me = 'yapeng.zou@newtouch.cn'
+        # msg = MIMEText(content, _subtype='plain', _charset='utf-8')
+        msg = MIMEText(content, _subtype='html', _charset='utf-8')
+        msg['Subject'] = subject
+        msg['From'] = me
+        msg['To'] = ";".join(to_list)
+        try:
+            server = smtplib.SMTP()
+            # server = smtplib.SMTP_SSL()
+            server.connect("mail.newtouch.cn")
+            server.login("yapeng.zou@newtouch.cn","123456")
+            server.sendmail(me, to_list, msg.as_string())
+            server.close()
+        except Exception, e:
+            print str(e)
+            pass
 
     def __str__(self):
         return self.user.username

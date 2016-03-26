@@ -1,4 +1,4 @@
-<div class="panel">
+<div class="panel" id="new-comment">
     <div class="panel-body">
         <h1 class="cmnt-head ">Leave a Comments</h1>
         <form action="{% url 'blog:comment' %}?next={{ request.path }}" method="post" class="form-horizontal leave-cmnt">

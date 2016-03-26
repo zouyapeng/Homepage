@@ -7,6 +7,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.utils import timezone
 from uuslug import slugify
+import thread
 
 class PostQuerySet(models.QuerySet):
     def published(self):
@@ -81,15 +82,43 @@ class Comment(models.Model):
     create_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ('-create_date',)
+        ordering = ('create_date',)
         get_latest_by = 'create_date'
+
+    def generate_message(self):
+        print self.post.get_absolute_url()
+        message = """\
+            <html>
+              <head></head>
+              <body>
+                <p>您好!<br>
+                   你最近评价的文章有了新的评价<br>
+                   <a href="%s">%s</a>
+                </p>
+              </body>
+            </html>
+            """ % ('http://blog.zouyapeng.website' + self.post.get_absolute_url(), self.post.slug)
+        return message
 
     def save(self, *args, **kwargs):
         super(Comment, self).save(*args, **kwargs)
-        comments = self.post.post_comment.all()
-        emails = list(set([comment.user.email for comment in comments ]))
-        emails.remove(self.user.email)
-        emails.remove(self.post.author.email)
+        now = datetime.datetime.now()
+        prev_day = now - datetime.timedelta(days=30)
+        comments = self.post.post_comment.filter(date_created__range=(prev_day, now))
+        users = []
+        for comment in comments:
+            if comment.user not in users:
+                users.append(comment.user)
+
+        if self.post.author not in users:
+            users.append(self.post.author)
+
+        users.remove(self.user)
+
+        for user in users:
+            if user.user_profile.enable_email is True:
+                thread.start_new_thread(user.user_profile.email_user, ('[Zouyapeng 博客]你有一条新消息', self.generate_message()))
+                # user.user_profile.email_user()
 
     def get_absolute_url(self):
         kwargs = {
