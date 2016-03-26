@@ -42,7 +42,7 @@ class UserProfile(models.Model):
             server = smtplib.SMTP()
             # server = smtplib.SMTP_SSL()
             server.connect("mail.newtouch.cn")
-            server.login("yapeng.zou@newtouch.cn","123456")
+            server.login("yapeng.zou@newtouch.cn","<password>")
             server.sendmail(me, to_list, msg.as_string())
             server.close()
         except Exception, e:
