@@ -1,0 +1,12 @@
+{% load staticfiles %}
+
+<div class="logo">
+    <a href="{% url 'blog:index' %}">
+        <img src="{% static "images/logo.png" %}" alt="">
+        <img src="{% static "images/logo_y.png" %}" alt="">
+        <img src="{% static "images/logo_p.png" %}" alt="">
+    </a>
+</div>
+<div class="logo-icon text-center">
+    <a href="{% url 'blog:index' %}"><img src="{% static "images/logo_icon.png" %}" alt=""></a>
+</div>

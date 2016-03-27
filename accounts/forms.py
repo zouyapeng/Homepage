@@ -87,15 +87,17 @@ class ProfileForm(forms.Form):
     enable_email = forms.BooleanField(required=False ,
                                       widget=forms.CheckboxInput(attrs={'type':'checkbox'}))
 
-    avatar = forms.ImageField(label='Avatar',required=False)
+    avatar = forms.ImageField(label='Avatar', required=False)
 
     sex = forms.ChoiceField(label='Sex',
+                            required=False,
                             choices=(('Male','Male'),('Female','Female'),('Secrecy','Secrecy')),
                             widget=forms.RadioSelect(attrs={'tabindex': '3',
                                                             'type': 'radio',
                                                             'name': 'demo-radio'}))
 
     birthday = forms.DateField(label='Birthday',
+                               required=False,
                                widget=forms.DateInput(attrs={'class': 'form-control form-control-inline input-medium default-date-picker',
                                                              'type': 'text',
                                                              'size': '16'}))
@@ -106,8 +108,8 @@ class ProfileForm(forms.Form):
                                                              'type': 'text'}))
     qq = forms.CharField(max_length=256,
                          required=False,
-                               label='QQ',
-                               widget=forms.TextInput(attrs={'class' : 'form-control',
+                         label='QQ',
+                         widget=forms.TextInput(attrs={'class' : 'form-control',
                                                              'type': 'text'}))
 
     def clean(self):
