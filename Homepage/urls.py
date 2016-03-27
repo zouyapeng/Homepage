@@ -18,14 +18,15 @@ from django.contrib import admin
 from django.core.urlresolvers import reverse_lazy
 from accounts import urls as accounts_urls
 from blog import urls as blog_urls
-from django.views.generic import RedirectView
+from django.views.generic import RedirectView,TemplateView
 from settings import MEDIA_ROOT
 
 
 urlpatterns = [
     url(r'^$', RedirectView.as_view(url=reverse_lazy('blog:index'), permanent=True), name='index'),
+    url(r'^admin/$', TemplateView.as_view(template_name='admin.html')),
     url(r'^accounts/',include(accounts_urls, namespace='account')),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^fucktv/', include(admin.site.urls)),
     url(r'^blog/',include(blog_urls, namespace='blog')),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': MEDIA_ROOT}),
 ]
