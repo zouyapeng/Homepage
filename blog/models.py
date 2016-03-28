@@ -104,7 +104,7 @@ class Comment(models.Model):
         super(Comment, self).save(*args, **kwargs)
         now = datetime.datetime.now()
         prev_day = now - datetime.timedelta(days=30)
-        comments = self.post.post_comment.filter(date_created__range=(prev_day, now))
+        comments = self.post.post_comment.filter(create_date__range=(prev_day, now))
         users = []
         for comment in comments:
             if comment.user not in users:
@@ -130,4 +130,4 @@ class Comment(models.Model):
         return reverse('blog:post', kwargs=kwargs)
 
     def __unicode__(self):
-        return self.create_date.strftime('%H:%M:%S')
+        return "%s:%s" % (self.post.slug, self.context)

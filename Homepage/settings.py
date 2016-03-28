@@ -82,19 +82,27 @@ WSGI_APPLICATION = 'Homepage.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Homepage',
-        'USER': 'root',
-        'PASSWORD': '123456',
-        'HOST': 'localhost',
-        'PORT': '3306',
-	    # 'OPTIONS': {
-   	 #        'init_command': 'SET storage_engine=MyISAM',
-	    # }
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'Homepage.sql',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'Homepage',
+            'USER': 'root',
+            'PASSWORD': '123456',
+            'HOST': 'localhost',
+            'PORT': '3306',
+            # 'OPTIONS': {
+         #        'init_command': 'SET storage_engine=MyISAM',
+            # }
+        }
+    }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/

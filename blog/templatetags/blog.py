@@ -29,7 +29,8 @@ def render_notice_links():
 @register.inclusion_tag('blog/assess_link_snippet.html')
 def render_assess_links():
     return {
-        'assesses': Comment.objects.all()[:5],
+        'assesses': Comment.objects.order_by('-create_date')[:5],
+        # 'assesses': Comment.objects.all()[-5s:],
     }
 
 @register.simple_tag

@@ -4,7 +4,7 @@ from pagedown.widgets import AdminPagedownWidget
 from django import forms
 
 
-from models import Post, Category, Notice
+from models import Post, Category, Notice, Comment
 # Register your models here.
 class PostForm(forms.ModelForm):
     content = forms.CharField(widget=AdminPagedownWidget())
@@ -29,6 +29,7 @@ class NoticeAdmin(admin.ModelAdmin):
     form = NoticeForm
     list_display = ['headline']
 
+admin.site.register(Comment)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Category)
 admin.site.register(Notice, NoticeAdmin)
