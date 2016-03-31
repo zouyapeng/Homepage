@@ -91,13 +91,16 @@ class Comment(models.Model):
             <html>
               <head></head>
               <body>
-                <p>您好!<br>
-                   你最近评价的文章有了新的评价<br>
+                <p>%s<br>
+                   %s<br>
                    <a href="%s">%s</a>
                 </p>
               </body>
             </html>
-            """ % ('http://blog.zouyapeng.website' + self.post.get_absolute_url(), self.post.slug)
+            """ % (u'您好!',
+                   u'你最近评价的文章有了新的评价',
+                   u'http://blog.zouyapeng.website' + self.post.get_absolute_url(),
+                   self.post.slug)
         return message
 
     def save(self, *args, **kwargs):
