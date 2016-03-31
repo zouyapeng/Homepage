@@ -86,7 +86,6 @@ class Comment(models.Model):
         get_latest_by = 'create_date'
 
     def generate_message(self):
-        print self.post.get_absolute_url()
         message = """\
             <html>
               <head></head>
@@ -100,7 +99,7 @@ class Comment(models.Model):
             """ % (u'您好!',
                    u'你最近评价的文章有了新的评价',
                    u'http://blog.zouyapeng.website' + self.post.get_absolute_url(),
-                   self.post.slug)
+                   self.post.headline)
         return message
 
     def save(self, *args, **kwargs):
