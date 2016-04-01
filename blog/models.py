@@ -47,6 +47,7 @@ class Post(models.Model):
     is_active = models.BooleanField(default=False)
     category = models.ManyToManyField(Category, related_name='category_post')
     content = models.TextField()
+    hitcount = models.IntegerField(default=0)
     pub_date = models.DateTimeField(auto_now_add=True)
     create_date = models.DateTimeField(editable=False, auto_now_add=True)
     update_date = models.DateTimeField(editable=False, auto_now=True)

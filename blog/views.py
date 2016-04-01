@@ -47,7 +47,11 @@ class BlogArchiveCategoryView(BlogViewMixin, ListView):
         return context
 
 class BlogDateDetailView(BlogViewMixin, DateDetailView):
-    pass
+    def get_object(self, queryset=None):
+        post = super(BlogDateDetailView, self).get_object(queryset)
+        post.hitcount += 1
+        post.save()
+        return post
 
 class BlogMonthArchiveView(BlogViewMixin, MonthArchiveView):
     pass
